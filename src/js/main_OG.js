@@ -4,7 +4,7 @@
  */
 
 var mapModules = (function () {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiaGVuZzJqIiwiYSI6ImNqMmF5aWRmMjAwZzIyd2x2cGNyd3IxeDEifQ.dstUJ-_cgpg4qU3mgImiOg';
+    mapboxgl.accessToken = ' ';
 
     var map = new mapboxgl.Map({
         style: 'mapbox://styles/heng2j/cjgkwpxsr00032so265r204to',
