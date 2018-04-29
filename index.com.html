@@ -25,27 +25,14 @@
 </style>
 
 <div id='map'></div>
-<div id='menu'>
-    <input id='basic' type='radio' name='rtoggle' value='basic' checked='checked'>
-    <label for='basic'>basic</label>
-    <input id='streets' type='radio' name='rtoggle' value='streets'>
-    <label for='streets'>streets</label>
-    <input id='bright' type='radio' name='rtoggle' value='bright'>
-    <label for='bright'>bright</label>
-    <input id='light' type='radio' name='rtoggle' value='light'>
-    <label for='light'>light</label>
-    <input id='dark' type='radio' name='rtoggle' value='dark'>
-    <label for='dark'>dark</label>
-    <input id='satellite' type='radio' name='rtoggle' value='satellite'>
-    <label for='satellite'>satellite</label>
-</div>
+
 
 <!--<script src="src/js/main.js"></script>-->
 
 <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiaGVuZzJqIiwiYSI6ImNqMmF5aWRmMjAwZzIyd2x2cGNyd3IxeDEifQ.dstUJ-_cgpg4qU3mgImiOg';
     var map = new mapboxgl.Map({
-        style: 'mapbox://styles/mapbox/light-v9',
+        style: 'mapbox://styles/heng2j/cjgkwpxsr00032so265r204to',
         center: [-74.0066, 40.7135],
         zoom: 15.5,
         pitch: 45,
@@ -118,6 +105,8 @@
             }
         }, labelLayerId);
     });
+
+
 </script>
 
 </body>

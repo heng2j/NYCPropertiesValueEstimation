@@ -1,0 +1,28 @@
+{
+  "name": "chapter4",
+  "version": "0.0.1",
+  "description": "ISS finder Application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": "8.9.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "geojson": "^0.5.0",
+    "request": "^2.83.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heng2j/NYCPropertiesValueEstimation.git"
+  },
+  "author": "heng",
+  "bugs": {
+    "url": "https://github.com/heng2j/NYCPropertiesValueEstimation/issues"
+  },
+  "homepage": "https://github.com/heng2j/NYCPropertiesValueEstimation#readme"
+}

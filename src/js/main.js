@@ -1,15 +1,14 @@
 /**
  * mapModule renders data sets with different visual representation.
- * @type {{renderProperties, renderPrisonHeatMap}}
+ * @type {{renderPrisons, renderPrisonHeatMap}}
  */
-
 var mapModules = (function () {
     mapboxgl.accessToken = 'pk.eyJ1IjoiaGVuZzJqIiwiYSI6ImNqMmF5aWRmMjAwZzIyd2x2cGNyd3IxeDEifQ.dstUJ-_cgpg4qU3mgImiOg';
 
     var map = new mapboxgl.Map({
-        style: 'mapbox://styles/mapbox/light-v9',
-        center: [-74.0066, 40.7135],
-        zoom: 15.5,
+        style: 'mapbox://styles/heng2j/cjgkwpxsr00032so265r204to',
+        center: [-73.9612, 40.6405],
+        zoom: 11.95,
         pitch: 45,
         bearing: -17.6,
         hash: true,
@@ -24,43 +23,94 @@ var mapModules = (function () {
             map.addControl(new mapboxgl.FullscreenControl());
 
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', "src/data/FY11_BROOKLYN_For_Viz.geojson");
+            xhr.open('GET',  "src/data/FY11_BROOKLYN_For_Viz.geojson");
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onload = function () {
                 if (xhr.status === 200) {
                     var data = JSON.parse(xhr.responseText);
 
+                   console.log(data);
+
                     map.addLayer({
                         "id": "properties",
-                        "type": "symbol",
+                        "type": "circle",
                         "source": {
                             "type": "geojson",
                             "data": data
                         },
+                        "minzoom": 10,
+                        "maxzoom": 19.3,
                         "layout": {
-                            "icon-image": "prison-15",
-                            "text-field": "{name}",
-                            "text-size": 8,
-                            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                            "text-offset": [0, 0.6],
-                            "text-anchor": "top"
+                            "visibility": "visible"
+                        },
+                        "paint": {
+                            "circle-color": {
+                                "base": 1,
+                                "type": "exponential",
+                                "property": "FULLVAL",
+                                "stops": [
+                                    [
+                                        100000,
+                                        "hsl(89, 78%, 82%)"
+                                    ],
+                                    [
+                                        500000,
+                                        "hsl(98, 100%, 81%)"
+                                    ],
+                                    [
+                                        750000,
+                                        "hsl(71, 98%, 80%)"
+                                    ],
+                                    [
+                                        1000000,
+                                        "hsl(39, 98%, 84%)"
+                                    ],
+                                    [
+                                        1500000,
+                                        "hsl(359, 100%, 87%)"
+                                    ],
+                                    [
+                                        2500000,
+                                        "hsl(359, 100%, 81%)"
+                                    ],
+                                    [
+                                        5000000,
+                                        "hsl(359, 99%, 68%)"
+                                    ],
+                                    [
+                                        10000000,
+                                        "hsl(359, 100%, 47%)"
+                                    ],
+                                    [
+                                        55851249,
+                                        "hsl(359, 100%, 34%)"
+                                    ]
+                                ]
+                            }
                         }
                     });
 
                 }
             };
-
             xhr.send();
 
             // When a click event occurs on a feature in the places layer, open a popup at the
             // location of the feature, with description HTML from its properties.
-            map.on('click', 'prisons', function (e) {
-                var prison = e.features[0].properties,
+            map.on('click', 'properties', function (e) {
+                var property = e.features[0].properties,
                     popOverContet;
 
-                for (prop in prison) {
-                    popOverContet += prison[prop] + '</br>';
+                    console.log(property);
+
+                for (prop in property) {
+
+                    console.log(prop);
+                    console.log(property[prop]);
+
+                    popOverContet += prop  + ': '  + property[prop] + '</br>';
                 }
+
+
 
                 new mapboxgl.Popup()
                     .setLngLat(e.features[0].geometry.coordinates)
@@ -69,12 +119,12 @@ var mapModules = (function () {
             });
 
             // Change the cursor to a pointer when the mouse is over the places layer.
-            map.on('mouseenter', 'prisons', function () {
+            map.on('mouseenter', 'properties', function () {
                 map.getCanvas().style.cursor = 'pointer';
             });
 
             // Change it back to a pointer when it leaves.
-            map.on('mouseleave', 'prisons', function () {
+            map.on('mouseleave', 'properties', function () {
                 map.getCanvas().style.cursor = '';
             });
 
@@ -83,9 +133,9 @@ var mapModules = (function () {
     }
 
     /**
-     * Renders prisons in USA with heatmap
+     * Renders Properties in USA with heatmap
      */
-    function renderPrisonHeatMap() {
+    function renderPropertiesHeatMap() {
         map.on('load', function () {
 
             var xhr = new XMLHttpRequest();
@@ -170,7 +220,7 @@ var mapModules = (function () {
 
     return {
         renderProperties: renderProperties,
-        renderPrisonHeatMap: renderPrisonHeatMap
+        renderPropertiesHeatMap: renderPropertiesHeatMap
     };
 
 })();
